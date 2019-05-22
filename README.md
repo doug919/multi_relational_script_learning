@@ -33,6 +33,8 @@ EventTransR
 
 # running experiments with pre-trained models
 
+Two configuation files: train_config_{xxx}.json and relation_{xxx}.json.
+
 ## MCNC
 
 place holder
