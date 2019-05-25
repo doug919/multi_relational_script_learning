@@ -53,7 +53,7 @@ You can download the models from the link in the Download section
     - model: pretrained/out_transr_v0.2.10_long9_tmp
     - config: train_config_transr_v0.2.10_long9.json
 
-# running experiments with pre-trained models
+# Run experiments with pre-trained models
 
 To begin with, download the test data and pretrain models in the Download section, and decompress them in the repo folder. You need two configuation files: train_config_{xxx}.json and relation_{xxx}.json. Check all the file paths in the configuration file are correct.
 
@@ -89,7 +89,7 @@ place holder
 
 place holder
 
-# train from scratch
+# Train from scratch
 
 Download the training data from the Download section. Make sure the training file path in the config file is correct. Then run
 ```
