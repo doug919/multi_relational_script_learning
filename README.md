@@ -1,5 +1,5 @@
 # mutlirelational_script
-This repository contains code, data, and models for the following papers. 
+This repository contains code, data, and pre-trained models for the following papers. 
 
 ```
 I-Ta Lee, and Dan Goldwasser, "Multi-Relational Script Learning for Discourse Relations", ACL 2019
