@@ -5,6 +5,16 @@ This repository contains code, data, and models for the following papers.
 I-Ta Lee, and Dan Goldwasser, "Multi-Relational Script Learning for Discourse Relations", ACL 2019
 ```
 
+bibtex
+```
+@inproceedings{lee2019multi,
+  title={Multi-Relational Script Learning for Discourse Relations},
+  author={Lee, I-Ta and Goldwasser, Dan},
+  booktitle={Proceedings of the 56th Annual Meeting of the Association for Computational Linguistics},
+  year={2019}
+}
+```
+
 If you use any resources within this repository, please cite the paper.
 
 # Dependencies
@@ -32,6 +42,8 @@ EventTransE
 EventTransR
 
 # running experiments with pre-trained models
+
+Two configuation files: train_config_{xxx}.json and relation_{xxx}.json.
 
 ## MCNC
 
