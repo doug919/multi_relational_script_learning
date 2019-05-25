@@ -25,8 +25,8 @@ pip install -r requirements.txt
 
 # Models
 
-EventTransE
-EventTransR
+- EventTransE
+- EventTransR
 
 
 # Data
@@ -40,13 +40,14 @@ As our models need entity mention spans rather than entity head words only, whic
   - test data and misc: url
   - training data: url
   - pretrained models: url
-  - GloVe Word Embeddings: you can get it from https://nlp.stanford.edu/projects/glove/. I use the glove.6B.300d.txt.
+  - GloVe Word Embeddings: you can get glove.6B.300d.txt from https://nlp.stanford.edu/projects/glove/. 
 
 # pre-trained models
 
 You can download the models from the link in the Download section
-EventTransE: pretrained/out_transe_v0.2.10_long9_tmp
-EventTransR: pretrained/out_transr_v0.2.10_long9_tmp
+
+- EventTransE: pretrained/out_transe_v0.2.10_long9_tmp
+- EventTransR: pretrained/out_transr_v0.2.10_long9_tmp
 
 
 # running experiments with pre-trained models
@@ -63,7 +64,9 @@ python bin/evaluations/eval_mcnc.py -v pretrained/out_transe_v02.10_long9_tmp/mo
 For EventTransR, you simply need to replace the model file, argument encoder file, and config file.
 
 
-## MCNS
+## MCNS and MCNE
+
+Two experiments run in one command.
 
 For EventTransE:
 ```
@@ -72,11 +75,6 @@ python bin/evaluations/eval_mcns.py -v pretrained/out_transe_v0.2.10_long9_tmp/m
 
 For EventTransR, you simply need to replace the model file, argument encoder file, and config file.
 
-
-
-## MCNE
-
-place holder
 
 ## Intrinsic Discourse Relations
 
@@ -88,10 +86,11 @@ place holder
 
 # train from scratch
 
-Download the training data from the Download section, and run
-
+Download the training data from the Download section. Make sure the training file path in the config file is correct. Then run
 ```
+python bin/train.py -v -r train_config_transe_v0.2.10_long9.json output_model
 ```
+Again, for EventTransR, simply replace the config file.
 
 # References
 
