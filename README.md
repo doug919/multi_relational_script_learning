@@ -46,13 +46,18 @@ As our models need entity mention spans rather than entity head words only, whic
 
 You can download the models from the link in the Download section
 
-- EventTransE: pretrained/out_transe_v0.2.10_long9_tmp
+- EventTransE: 
+    - model: pretrained/out_transe_v0.2.10_long9_tmp
+    - config: train_config_transe_v0.2.10_long9.json
 - EventTransR: pretrained/out_transr_v0.2.10_long9_tmp
-
+    - model: pretrained/out_transr_v0.2.10_long9_tmp
+    - config: train_config_transr_v0.2.10_long9.json
 
 # running experiments with pre-trained models
 
 To begin with, download the test data and pretrain models in the Download section, and decompress them in the repo folder. You need two configuation files: train_config_{xxx}.json and relation_{xxx}.json. Check all the file paths in the configuration file are correct.
+
+Note that for all the executable .py, you can use **-h** argument to see the help and **-g <gpu_id>** to specify running on a specific gpu.
 
 ## MCNC
 
