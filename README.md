@@ -29,7 +29,7 @@ Our core experiments (MCNC, MCNS, MCNE) use data splits of NYT section of Englis
 
 As our models need entity mention spans rather than entity head words only, which are not provided in Granroth-Wilding's code outputs, considering the stochastic factors in the pre-processing, we release a newly pre-processsed train/dev/test data for MCNC, MCNS, MCNE (check the experiments in the paper). Unlike Granroth-Wilding's code, we use Stanford CoreNLP as the text pipeline tool and follow the heuristic mentioned in the paper for retrieving all the events.
 
-# Download
+## Download
 
   - test data and misc: url
   - training data: url
