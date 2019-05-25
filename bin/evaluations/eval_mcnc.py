@@ -19,10 +19,10 @@ from dnee.models import EventTransR, EventTransE, ArgWordEncoder, create_argw_en
 
 def get_arguments(argv):
     parser = argparse.ArgumentParser(description='MCNC evaluation')
-    parser.add_argument('encoder_file', metavar='ENCODER_FILE',
-                        help='encoder file.')
     parser.add_argument('model_file', metavar='MODEL_FILE',
                         help='model file.')
+    parser.add_argument('encoder_file', metavar='ENCODER_FILE',
+                        help='encoder file.')
     parser.add_argument('question_file', metavar='QUESTION_FILE',
                         help='questions.')
     parser.add_argument('training_config', metavar='TRAINING_CONFIG',
