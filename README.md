@@ -23,12 +23,6 @@ If you use any resources within this repository, please cite the paper.
 pip install -r requirements.txt
 ```
 
-# Models
-
-- EventTransE
-- EventTransR
-
-
 # Data
 
 Our core experiments (MCNC, MCNS, MCNE) use data splits of NYT section of English Gigawords, following the data splits given by Granroth-Wilding (https://mark.granroth-wilding.co.uk/papers/what_happens_next/) [1].
