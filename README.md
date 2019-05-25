@@ -78,7 +78,7 @@ For EventTransR, you simply need to replace the model file, argument encoder fil
 
 ## Intrinsic Discourse Relations
 
-The evaluations here take long time to run. Recommend using GPUs.
+The evaluations here take long time to run. GPUs recommended.
 
 For EventTransE
 ```
