@@ -1,0 +1,17 @@
+{
+    "Word2Vec": {
+        "embedding_file": "/homes/lee2226/scratch3/downloaded_embeddings/GoogleNews-vectors-negative300.txt",
+        "emb_file_skip_first_line": 1
+    },
+    "Word2VecEvent": {
+        "embedding_file": "data/out_word2vec_events.txt"
+    },
+    "batch_size": 500,
+    "n_dataloader_workers": 1,
+    "skipthought_dir": "data/skipthought_models",
+    "event_dim": 500,
+    "margin": 1,
+    "n_epochs": 2,
+    "optimizer": "adagrad",
+    "n_batches_per_record": 100
+}

@@ -1,0 +1,17 @@
+{
+    "rel2idx": {
+        "Comparison.Contrast": 0,
+        "Contingency.Cause.Reason": 1,
+        "Contingency.Cause.Result": 2,
+        "Contingency.Condition": 3,
+        "Expansion.Restatement": 4,
+        "Expansion.Conjunction": 5,
+        "Expansion.Instantiation": 6,
+        "Temporal.Synchrony": 7,
+        "Temporal.Asynchronous": 8,
+        "Context": 9,
+        "Coref": 10
+    },
+    "disc_begin": 0,
+    "disc_end": 9
+}

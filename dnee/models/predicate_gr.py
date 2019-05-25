@@ -66,10 +66,13 @@ def index_predicategr_example(e1, e2, nestr, e2idx):
     return idxs
 
 
-def load_word_embeddings(fpath, use_torch=False):
+def load_word_embeddings(fpath, use_torch=False, skip_first_line=True):
     we = {}
     with open(fpath, 'r') as fr:
         for line in fr:
+            if skip_first_line:
+                skip_first_line = False
+                continue
             line = line.rstrip()
             sp = line.split(" ")
             emb = np.squeeze(np.array([sp[1:]], dtype=np.float32))
@@ -225,35 +228,37 @@ class Word2Vec(PredicateGrBase):
     def __init__(self, config, verbose=True):
         super(Word2Vec, self).__init__()
         fpath = config['embedding_file']
-        self.embs = load_word_embeddings(fpath)
+        self.embs = load_word_embeddings(fpath, skip_first_line=config['emb_file_skip_first_line'])
         self.dim = self.embs[self.embs.keys()[0]].shape[0]
     
     def score(self, v1, v2):
         return self.cosine_similarity(v1, v2)
 
+    def aggr_emb(self, events):
+        emb = np.zeros(self.dim, dtype=np.float32)
+        cnt = 0
+        for e in events:
+            if e.pred in self.embs:
+                emb += self.embs[e.pred]
+                cnt += 1
+            if e.arg0_head in self.embs:
+                emb += self.embs[e.arg0_head]
+                cnt += 1
+            if e.arg1_head in self.embs:
+                emb += self.embs[e.arg1_head]
+                cnt += 1
+            if e.arg2_head in self.embs:
+                emb += self.embs[e.arg2_head]
+                cnt += 1
+        return emb if cnt > 0 else np.random.uniform(
+                low=-1.0/self.dim, high=1.0/self.dim, size=self.dim)
+
     def predict_mcnc(self, ctx_events, choices):
-        ctx_emb = np.zeros(self.dim, dtype=np.float32)
-        for ctx in ctx_events:
-            if ctx.pred in self.embs:
-                ctx_emb += self.embs[ctx.pred]
-            if ctx.arg0_head in self.embs:
-                ctx_emb += self.embs[ctx.arg0_head]
-            if ctx.arg1_head in self.embs:
-                ctx_emb += self.embs[ctx.arg1_head]
-            if ctx.arg2_head in self.embs:
-                ctx_emb += self.embs[ctx.arg2_head]
+        ctx_emb = self.aggr_emb(ctx_events)
 
         ch_embs = []
         for ch in choices:
-            ch_emb = np.zeros(self.dim, dtype=np.float32)
-            if ch.pred in self.embs:
-                ch_emb += self.embs[ch.pred]
-            if ch.arg0_head in self.embs:
-                ch_emb += self.embs[ch.arg0_head]
-            if ch.arg1_head in self.embs:
-                ch_emb += self.embs[ch.arg1_head]
-            if ch.arg2_head in self.embs:
-                ch_emb += self.embs[ch.arg2_head]
+            ch_emb = self.aggr_emb([ch])
             ch_embs.append(ch_emb)
 
         max_score = -1
