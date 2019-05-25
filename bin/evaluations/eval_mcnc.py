@@ -19,8 +19,10 @@ from dnee.models import EventTransR, EventTransE, ArgWordEncoder, create_argw_en
 
 def get_arguments(argv):
     parser = argparse.ArgumentParser(description='MCNC evaluation')
+    parser.add_argument('encoder_file', metavar='ENCODER_FILE',
+                        help='encoder file.')
     parser.add_argument('model_file', metavar='MODEL_FILE',
-                        help='modelf file.')
+                        help='model file.')
     parser.add_argument('question_file', metavar='QUESTION_FILE',
                         help='questions.')
     parser.add_argument('training_config', metavar='TRAINING_CONFIG',
@@ -32,8 +34,6 @@ def get_arguments(argv):
                         help='batch size for evaluation')
     parser.add_argument('-g', '--gpu_id', type=int, default=None,
                         help='gpu id')
-    parser.add_argument('-e', '--encoder_file', default=None,
-                        help='encoder file (DEFAULT: None)')
     parser.add_argument('-c', '--context_rel', action='store_true', default=False,
                         help='use REL_CONTEXT instead of REL_COREF')
     parser.add_argument('-u', '--use_head', action='store_true', default=False,

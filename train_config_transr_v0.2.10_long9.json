@@ -1,7 +1,7 @@
 {
-    "training_data": "training_data_v0.2.10_long9/nyt_indexed_triplets_train_v0.2.10_long9",
-    "predicate_indices": "pred_index_filtered_v0.2.10_long9.txt",
-    "argw_indices": "argw_index_filtered_v0.2.10_long9.txt",
+    "training_data": "data/training_data_v0.2.10_long9/nyt_indexed_triplets_train_v0.2.10_long9",
+    "predicate_indices": "data/pred_index_filtered_v0.2.10_long9.txt",
+    "argw_indices": "data/argw_index_filtered_v0.2.10_long9.txt",
     "batch_size": 1000,
     "n_dataloader_workers": 2,
     "skipthought_dir": "data/skipthought_models",
