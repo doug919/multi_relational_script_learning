@@ -1,4 +1,4 @@
-# mutlirelational_script
+# Multi-Relation Script Learning for Discourse Relations
 This repository contains code, data, and pre-trained models for the following papers. 
 
 ```
@@ -43,7 +43,7 @@ As our models need entity mention spans rather than entity head words only, whic
   - GloVe Word Embeddings: you can get glove.6B.300d.txt from https://nlp.stanford.edu/projects/glove/. 
   - ELMo: you can download medium size ELMo model from https://allennlp.org/elmo (elmo_2x2048_256_2048cnn_1xhighway_weights.hdf5 and elmo_2x2048_256_2048cnn_1xhighway_options.hdf5). Put them in ./data folder.
 
-# pre-trained models
+# Pre-trained models
 
 You can download the models from the link in the Download section
 
