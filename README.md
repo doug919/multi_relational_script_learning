@@ -19,8 +19,11 @@ If you use any resources within this repository, please cite the paper.
 
 # Dependencies
 
+Our project was originally using Python2.7. However, when ELMo embeddings, which requires Python3, come into play, we migrate the code runnable with Python3. Please install dependencies for both.
+
 ```
 pip install -r requirements.txt
+pip3 install -r requirements3.txt
 ```
 
 # Data
@@ -31,7 +34,7 @@ As our models need entity mention spans rather than entity head words only, whic
 
 ## Download
 
-  - test data and misc: url
+  - dev/test data and misc: url
   - training data: url
   - pretrained models: url
   - GloVe Word Embeddings: you can get glove.6B.300d.txt from https://nlp.stanford.edu/projects/glove/. 
@@ -80,6 +83,15 @@ For EventTransR, you simply need to replace the model file, argument encoder fil
 
 The evaluations here take long time to run. GPUs recommended.
 
+### Predict an event or an relation class
+
+There are two set-up here:
+
+  - Predict the next event given one event and relation
+  - Predict the relation given two events
+ 
+The following command will output results for both setups.
+
 For EventTransE
 ```
 python bin/evaluations/eval_disc.py pretrained/out_transe_v0.2.10_long9_tmp/model_2_3_2591.pt pretrained/out_transe_v0.2.10_ong9_tmp/argw_enc_2_3_2591.pt data/disc_test_v0.2.0.pkl train_config_transe_v0.2.10_long9.json relation_9disc.json -v
@@ -87,15 +99,30 @@ python bin/evaluations/eval_disc.py pretrained/out_transe_v0.2.10_long9_tmp/mode
 
 For EventTransR, you simply need to replace the model file, argument encoder file, and config file.
 
-For testing ELMo, download ELMo models from the Download section. Python3 is required by ELMo.
+You can do this using pre-trained ELMo embeddings like what is described in the paper. To do so, download ELMo models from the Download section. Python3 is required by ELMo. This following commands also output results for the two setups.
 ```
 python3 bin/evaluations/eval_disc_elmo.py -v data/disc_test_v0.2.0.pkl relation_9disc.json
 ```
 
 
+### Triplet classication
+
+Another setup is to do a binary classification for a given triplet.
+
+
+For EventTransE
+```
+python bin/evaluations/eval_disc.py pretrained/out_transe_v0.2.10_long9_tmp/model_2_3_2591.pt pretrained/out_transe_v0.2.10_ong9_tmp/argw_enc_2_3_2591.pt data/disc_test_v0.2.0.pkl train_config_transe_v0.2.10_long9.json relation_9disc.json -v
+```
+
+
 ## Implicit Discourse Sense Classifications
 
-place holder
+Download ELMo models from the Download section. Python3 is required by ELMo. Download the pre-trained classifier (url) that takes in EventTransE+ELMo as input representations. The result reported in the paper is averaged over 5 runs.
+```
+python3 bin/evaluations/eval_disc_binary.py -v pretrained/out_transe_v0.2.10_long9_tmp/model_2_3_2591.pt pretrained/out_trane_v0.2.10_long9_tmp/argw_enc_2_3_2591.pt data/disc_dev_v0.2.0.pkl data/disc_test_v0.2.0.pkl train_config_transe_v0.2.10_long9.json relation_9disc.json
+```
+This command runs **ELMo+EventTransE**. To run with ELMo-only, add **-m** to the commmand.
 
 
 # Train from scratch
