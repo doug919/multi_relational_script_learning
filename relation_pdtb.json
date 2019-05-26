@@ -1,0 +1,20 @@
+{
+    "rel2idx": {"Temporal.Asynchronous.Precedence": 0,
+        "Temporal.Asynchronous.Succession": 1,
+        "Temporal.Synchrony": 2,
+        "Contingency.Cause.Reason": 3,
+        "Contingency.Cause.Result": 4,
+        "Contingency.Condition": 5,
+        "Comparison.Contrast": 6,
+        "Comparison.Concession": 7,
+        "Expansion.Conjunction": 8,
+        "Expansion.Instantiation": 9,
+        "Expansion.Restatement": 10,
+        "Expansion.Alternative": 11,
+        "Expansion.Alternative.Chosen alternative": 12,
+        "Expansion.Exception": 13,
+        "EntRel": 14
+    },
+    "disc_begin": 0,
+    "disc_end": 15
+}

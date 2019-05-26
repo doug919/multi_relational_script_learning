@@ -29,10 +29,6 @@ from dnee.models import AttnEventTransE, AttnEventTransR
 from dnee.events import extract_events
 from dnee.evals import discourse_sense as ds
 
-elmo_weight_file = "data/elmo_2x2048_256_2048cnn_1xhighway_weights.hdf5"
-elmo_option_file = "data/elmo_2x2048_256_2048cnn_1xhighway_options.json"
-DS_TRAIN_FLD = "ds_train_elmo"
-
 
 def get_arguments(argv):
     parser = argparse.ArgumentParser(description='evaluate embeddings on Discourse Sense')
@@ -58,8 +54,10 @@ def get_arguments(argv):
     parser.add_argument('output_folder', metavar='OUTPUT_FOLDER',
                         help='the folder for outputs.')
     
-    parser.add_argument('-u', '--use_dnee', action="store_true", default=False,
-                        help='use dnee features')
+    parser.add_argument('-w', '--elmo_weight_file', default="data/elmo_2x2048_256_2048cnn_1xhighway_weights.hdf5",
+                        help='ELMo weight file')
+    parser.add_argument('-p', '--elmo_option_file', default="data/elmo_2x2048_256_2048cnn_1xhighway_options.json",
+                        help='ELMo option file')
     parser.add_argument('-g', '--gpu_id', type=int, default=None,
                         help='gpu id')
     parser.add_argument('-v', '--verbose', action='store_true', default=False,
@@ -102,11 +100,11 @@ def eval_relations(fpath, fw_path, elmo, dnee_model, config, pred2idx, argw2idx,
     cm, valid_senses = ds.create_cm(rels, indices.DISCOURSE_REL2IDX)
 
     x, y = ds.get_features(rels, elmo, seq_len, dnee_model, dnee_seq_len, config, pred2idx, argw2idx, indices.DISCOURSE_REL2IDX,
-                            device=args.device, use_dnee=args.use_dnee)
+                            device=args.device, use_dnee=True)
     x0, x1, x0_dnee, x1_dnee, x_dnee = x
     x0, x1 = x0.to(args.device), x1.to(args.device)
     
-    model = ds.AttentionNN(len(indices.DISCOURSE_REL2IDX), event_dim=config['event_dim'], use_event=args.use_dnee).to(args.device)
+    model = ds.AttentionNN(len(indices.DISCOURSE_REL2IDX), event_dim=config['event_dim'], use_event=True).to(args.device)
     model.load_state_dict(torch.load(args.ds_model_file, map_location=lambda storage, location: storage))
     model.eval()
 
@@ -140,13 +138,18 @@ def main():
                                     map_location=lambda storage, location: storage))
     logging.info('Loading DNEE: {} s'.format(time.time()-t1))
     
-    elmo = Elmo(elmo_option_file, elmo_weight_file, 1, dropout=0)
+    elmo = Elmo(args.elmo_option_file, args.elmo_weight_file, 1, dropout=0)
     
-    DNEE_TRAIN_FLD = "ds_train_transe" if config['model_type'] == 'EventTransE' else 'ds_train_transr_tmp'
-    train_data = ds.DsDataset(DS_TRAIN_FLD, DNEE_TRAIN_FLD)
-    logging.info("DNEE_TRAIN_FLD={}".format(DNEE_TRAIN_FLD))
-    seq_len = train_data.seq_len
-    event_seq_len = train_data.dnee_seq_len
+    # DS_TRAIN_FLD = "ds_train_elmo"
+    # DNEE_TRAIN_FLD = "ds_train_transe" if config['model_type'] == 'EventTransE' else 'ds_train_transr_tmp'
+    # train_data = ds.DsDataset(DS_TRAIN_FLD, DNEE_TRAIN_FLD)
+    # logging.info("DNEE_TRAIN_FLD={}".format(DNEE_TRAIN_FLD))
+    # seq_len = train_data.seq_len
+    # event_seq_len = train_data.dnee_seq_len
+    
+    # These are the max seq length from training data (above code)
+    # We hardcode them to avoid loading training data
+    seq_len, event_seq_len = 392, 14
     logging.info("seq_len={}, event_seq_len={}".format(seq_len, event_seq_len))
     
     t1 = time.time()
