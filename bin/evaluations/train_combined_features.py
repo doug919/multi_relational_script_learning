@@ -27,12 +27,6 @@ from dnee.evals.confusion_matrix import Alphabet, ConfusionMatrix
 from dnee.models import skipthoughts as st
 
 
-# elmo_weight_file = "https://s3-us-west-2.amazonaws.com/allennlp/models/elmo/2x2048_256_2048cnn_1xhighway/elmo_2x2048_256_2048cnn_1xhighway_weights.hdf5"
-# elmo_option_file = "https://s3-us-west-2.amazonaws.com/allennlp/models/elmo/2x2048_256_2048cnn_1xhighway/elmo_2x2048_256_2048cnn_1xhighway_options.json"
-elmo_weight_file = "elmo_2x2048_256_2048cnn_1xhighway_weights.hdf5"
-elmo_option_file = "elmo_2x2048_256_2048cnn_1xhighway_options.json"
-
-
 def get_arguments(argv):
     parser = argparse.ArgumentParser(description='training for Discourse Sense')
     parser.add_argument('ds_train_fld', metavar='DS_TRAIN_FLD',
@@ -51,6 +45,10 @@ def get_arguments(argv):
     parser.add_argument('output_folder', metavar='OUTPUT_FOLDER',
                         help='output folder for models etc.')
 
+    parser.add_argument('-w', '--elmo_weight_file', default="data/elmo_2x2048_256_2048cnn_1xhighway_weights.hdf5",
+                        help='ELMo weight file')
+    parser.add_argument('-p', '--elmo_option_file', default="data/elmo_2x2048_256_2048cnn_1xhighway_options.json",
+                        help='ELMo option file')
     parser.add_argument('-s', '--no_dnee_scores', action='store_true', default=False,
                         help='Not using DNEE scores as features')
     parser.add_argument('-n', '--dnee_train_fld', default=None,
@@ -113,7 +111,7 @@ def main():
                                     map_location=lambda storage, location: storage))
     dnee_model.eval()
     
-    elmo = Elmo(elmo_option_file, elmo_weight_file, 1, dropout=0)
+    elmo = Elmo(args.elmo_option_file, args.elmo_weight_file, 1, dropout=0)
     train_data = ds.DsDataset(args.ds_train_fld, args.dnee_train_fld)
     
     dev_rels = [json.loads(line) for line in open(args.ds_dev_rel_file)]
