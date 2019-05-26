@@ -35,7 +35,7 @@ As our models need entity mention spans rather than entity head words only, whic
 ## Download
 
   - dev/test data and misc: url
-  - training data: url
+  - training data: I temporarily can't find a good way to share these huge files. Would figure it out ASAP. Email me if you are interested in. 
   - pretrained models: url
   - GloVe Word Embeddings: you can get glove.6B.300d.txt from https://nlp.stanford.edu/projects/glove/. 
   - ELMo: you can download medium size ELMo model from https://allennlp.org/elmo (elmo_2x2048_256_2048cnn_1xhighway_weights.hdf5 and elmo_2x2048_256_2048cnn_1xhighway_options.hdf5). Put them in ./data folder.
@@ -107,22 +107,22 @@ python3 bin/evaluations/eval_disc_elmo.py -v data/disc_test_v0.2.0.pkl relation_
 
 ### Triplet classication
 
-Another setup is to do a binary classification for a given triplet.
-
-
-For EventTransE
+Another setup is to do a binary classification for a given triplet. Download ELMo models from the Download section. Python3 is required by ELMo. 
 ```
-python bin/evaluations/eval_disc.py pretrained/out_transe_v0.2.10_long9_tmp/model_2_3_2591.pt pretrained/out_transe_v0.2.10_ong9_tmp/argw_enc_2_3_2591.pt data/disc_test_v0.2.0.pkl train_config_transe_v0.2.10_long9.json relation_9disc.json -v
+python3 bin/evaluations/eval_disc_binary.py -v pretrained/out_transe_v0.2.10_long9_tmp/model_2_3_2591.pt pretrained/out_trane_v0.2.10_long9_tmp/argw_enc_2_3_2591.pt data/disc_dev_v0.2.0.pkl data/disc_test_v0.2.0.pkl train_config_transe_v0.2.10_long9.json relation_9disc.json
 ```
+This command runs for **ELMo+EventTransE**. To run with ELMo-only, add **-m** to the commmand. The results are shown in the log file or stdout. The reported results are averaged over 5 runs
 
 
 ## Implicit Discourse Sense Classifications
 
 Download ELMo models from the Download section. Python3 is required by ELMo. Download the pre-trained classifier (url) that takes in EventTransE+ELMo as input representations. The result reported in the paper is averaged over 5 runs.
 ```
-python3 bin/evaluations/eval_disc_binary.py -v pretrained/out_transe_v0.2.10_long9_tmp/model_2_3_2591.pt pretrained/out_trane_v0.2.10_long9_tmp/argw_enc_2_3_2591.pt data/disc_dev_v0.2.0.pkl data/disc_test_v0.2.0.pkl train_config_transe_v0.2.10_long9.json relation_9disc.json
+python3 bin/evaluations/test_combined_features.py -v data/pdtb_ds/ds_dev_events.json data/pdtb_ds/ds_test_events.json data/ptb_ds/ds_blind_test_events.json pretrained/out_ds_transe_nonexplicit_t5/model_0_0_33.pt pretrained/out_ds_transe_nonexplicit_t5/argw_enc_0_0_33.pt train_config_ds_transe.json relation_pdtb.json pretrained/out_ds_comb_elmo_transe_e200_4/best_model.pt output_folder
 ```
-This command runs **ELMo+EventTransE**. To run with ELMo-only, add **-m** to the commmand.
+This will output predictions in json format, which is supported by the CONLL 2016's official scorer.
+ - You can get the scorer.py from here: https://github.com/attapol/conll16st
+ - You can get the gold data from https://www.cs.brandeis.edu/~clp/conll16st/index.html
 
 
 # Train from scratch
@@ -132,6 +132,7 @@ Download the training data from the Download section. Make sure the training fil
 python bin/train.py -v -r train_config_transe_v0.2.10_long9.json output_model
 ```
 Again, for EventTransR, simply replace the config file.
+
 
 # References
 
