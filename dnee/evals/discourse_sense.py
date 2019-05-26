@@ -50,7 +50,7 @@ DNEE_SENSE_MAP_4REL = {'Temporal.Asynchronous.Precedence': 'Temporal',
 
 class AttentionNN(torch.nn.Module):
     def __init__(self, n_rel_classes, arg_dim=512, dnee_score_dim=15, event_dim=None, dropout=0.0,
-            use_event=False, use_dnee_scores=False):
+            use_event=False, use_dnee_scores=True):
         super(AttentionNN, self).__init__()
         self.dropout = dropout
         self.arg_dim = arg_dim
