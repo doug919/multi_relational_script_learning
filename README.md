@@ -34,9 +34,19 @@ As our models need entity mention spans rather than entity head words only, whic
 
 ## Download
 
-  - dev/test data and misc: url
-  - training data: url
-  - pretrained models: url
+  - dev/test data and misc: [data.tar.gz](https://drive.google.com/file/d/1Jv-O69Zd0A-YeHGrYqKHlsu6qPLfD3yh/view?usp=sharing)
+  - training data: I temporarily can't find a good way to share these huge files. Would figure it out ASAP. Email me if you are interested in. 
+  - pretrained models: [pretrained.tar.gz](https://drive.google.com/file/d/1ogphXeArL4_qZFuN3qQIpGPLCnrbk5Gs/view?usp=sharing)
+  - skip-thought word embeddings: we use skip-thought's word embeddings [2] for our encoder. You can download pre-trained embeddings from https://github.com/ryankiros/skip-thoughts. Put them in the following locations:
+  ```
+  data/skipthought_models/dictionary.txt
+  data/skipthought_models/utable.npy
+  data/skipthought_models/btable.npy
+  data/skipthought_models/uni_skip.npz
+  data/skipthought_models/uni_skip.npz.pkl
+  data/skipthought_models/bi_skip.npz
+  data/skipthought_models/bi_skip.npz.pkl
+  ```
   - GloVe Word Embeddings: you can get glove.6B.300d.txt from https://nlp.stanford.edu/projects/glove/. 
   - ELMo: you can download medium size ELMo model from https://allennlp.org/elmo (elmo_2x2048_256_2048cnn_1xhighway_weights.hdf5 and elmo_2x2048_256_2048cnn_1xhighway_options.hdf5). Put them in ./data folder.
 
@@ -107,22 +117,22 @@ python3 bin/evaluations/eval_disc_elmo.py -v data/disc_test_v0.2.0.pkl relation_
 
 ### Triplet classication
 
-Another setup is to do a binary classification for a given triplet.
-
-
-For EventTransE
+Another setup is to do a binary classification for a given triplet. Download ELMo models from the Download section. Python3 is required by ELMo. 
 ```
-python bin/evaluations/eval_disc.py pretrained/out_transe_v0.2.10_long9_tmp/model_2_3_2591.pt pretrained/out_transe_v0.2.10_ong9_tmp/argw_enc_2_3_2591.pt data/disc_test_v0.2.0.pkl train_config_transe_v0.2.10_long9.json relation_9disc.json -v
+python3 bin/evaluations/eval_disc_binary.py -v pretrained/out_transe_v0.2.10_long9_tmp/model_2_3_2591.pt pretrained/out_trane_v0.2.10_long9_tmp/argw_enc_2_3_2591.pt data/disc_dev_v0.2.0.pkl data/disc_test_v0.2.0.pkl train_config_transe_v0.2.10_long9.json relation_9disc.json
 ```
+This command runs for **ELMo+EventTransE**. To run with ELMo-only, add **-m** to the commmand. The results are shown in the log file or stdout. The reported results are averaged over 5 runs
 
 
 ## Implicit Discourse Sense Classifications
 
-Download ELMo models from the Download section. Python3 is required by ELMo. Download the pre-trained classifier (url) that takes in EventTransE+ELMo as input representations. The result reported in the paper is averaged over 5 runs.
+Download ELMo models from the Download section. Python3 is required by ELMo. Download the pre-trained classifier (in pretraind.tar.gz in the Download section) that takes in EventTransE+ELMo as input representations. The result reported in the paper is averaged over 5 runs.
 ```
-python3 bin/evaluations/eval_disc_binary.py -v pretrained/out_transe_v0.2.10_long9_tmp/model_2_3_2591.pt pretrained/out_trane_v0.2.10_long9_tmp/argw_enc_2_3_2591.pt data/disc_dev_v0.2.0.pkl data/disc_test_v0.2.0.pkl train_config_transe_v0.2.10_long9.json relation_9disc.json
+python3 bin/evaluations/test_combined_features.py -v data/pdtb_ds/ds_dev_events.json data/pdtb_ds/ds_test_events.json data/ptb_ds/ds_blind_test_events.json pretrained/out_ds_transe_nonexplicit_t5/model_0_0_33.pt pretrained/out_ds_transe_nonexplicit_t5/argw_enc_0_0_33.pt train_config_ds_transe.json relation_pdtb.json pretrained/out_ds_comb_elmo_transe_e200_4/best_model.pt output_folder
 ```
-This command runs **ELMo+EventTransE**. To run with ELMo-only, add **-m** to the commmand.
+This will output predictions in json format, which is supported by the CONLL 2016's official scorer.
+ - You can get the scorer.py from here: https://github.com/attapol/conll16st
+ - You can get the gold data from https://www.cs.brandeis.edu/~clp/conll16st/index.html
 
 
 # Train from scratch
@@ -133,6 +143,8 @@ python bin/train.py -v -r train_config_transe_v0.2.10_long9.json output_model
 ```
 Again, for EventTransR, simply replace the config file.
 
+
 # References
 
 [1] Granroth-Wilding, Mark, and Stephen Clark. "What happens next? event prediction using a compositional neural network model." Thirtieth AAAI Conference on Artificial Intelligence. 2016.
+[2] Kiros, Ryan, et al. "Skip-thought vectors." Advances in neural information processing systems. 2015.
