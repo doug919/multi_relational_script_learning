@@ -34,9 +34,9 @@ As our models need entity mention spans rather than entity head words only, whic
 
 ## Download
 
-  - dev/test data and misc: [data.tar.gz](abc)
+  - dev/test data and misc: [data.tar.gz](https://drive.google.com/file/d/1Jv-O69Zd0A-YeHGrYqKHlsu6qPLfD3yh/view?usp=sharing)
   - training data: I temporarily can't find a good way to share these huge files. Would figure it out ASAP. Email me if you are interested in. 
-  - pretrained models: [pretrained.tar.gz](abc)
+  - pretrained models: [pretrained.tar.gz](https://drive.google.com/file/d/1ogphXeArL4_qZFuN3qQIpGPLCnrbk5Gs/view?usp=sharing)
   - skip-thought word embeddings: we use skip-thought's word embeddings [2] for our encoder. You can download pre-trained embeddings from https://github.com/ryankiros/skip-thoughts. Put them in the following locations:
   ```
   data/skipthought_models/dictionary.txt
