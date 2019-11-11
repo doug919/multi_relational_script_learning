@@ -37,7 +37,7 @@ As our models need entity mention spans rather than entity head words only, whic
 The datasets are in token-indexed triplet format and the index files are provided.
 
   - dev/test data and misc: [data.tar.gz](https://drive.google.com/file/d/1Jv-O69Zd0A-YeHGrYqKHlsu6qPLfD3yh/view?usp=sharing)
-  - training data: [training_data.tar.gz](https://purdue0-my.sharepoint.com/:u:/g/personal/lee2226_purdue_edu1/EZgwXFEaVi9Iv3dZts7zzMwB7fyfdk1B4BxvKzVB5zmmpg?e=zISuHP)
+  - training data: [training_data.tar.gz](https://purdue0-my.sharepoint.com/:u:/g/personal/lee2226_purdue_edu1/EShU8bK4-sNHkSGOn9MtN5wBoHXJD4o_V-n9lFwmnP3FJw?e=ME5y6L)
   - pretrained models: [pretrained.tar.gz](https://drive.google.com/file/d/1ogphXeArL4_qZFuN3qQIpGPLCnrbk5Gs/view?usp=sharing)
   - skip-thought word embeddings: we use skip-thought's word embeddings [2] for our encoder. You can download pre-trained embeddings from https://github.com/ryankiros/skip-thoughts. Put them in the following locations:
   ```
