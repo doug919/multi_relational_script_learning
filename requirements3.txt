@@ -95,7 +95,7 @@ prawcore==0.13.0
 preshed==2.0.1
 progressbar==2.5
 protobuf==3.7.1
-psutil==5.5.1
+psutil==5.6.6
 py==1.7.0
 pyaml==18.11.0
 pyasn1==0.4.5
