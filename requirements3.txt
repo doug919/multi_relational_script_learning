@@ -54,7 +54,7 @@ idna==2.8
 imagesize==1.1.0
 ipaddress==1.0.22
 itsdangerous==1.1.0
-Jinja2==2.10
+Jinja2==2.11.3
 jmespath==0.9.3
 joblib==0.13.2
 jsondiff==1.1.1
