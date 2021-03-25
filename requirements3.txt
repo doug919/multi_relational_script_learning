@@ -113,7 +113,7 @@ python-debian==0.1.32
 python-jose==2.0.2
 pytorch-pretrained-bert==0.3.0
 pytz==2017.3
-PyYAML==3.13
+PyYAML==5.4
 regex==2018.1.10
 requests==2.21.0
 requests-unixsocket==0.1.5
