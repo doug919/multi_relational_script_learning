@@ -30,7 +30,7 @@ psutil==5.4.8
 pyparsing==2.3.0
 python-dateutil==2.7.5
 pytz==2018.7
-PyYAML==3.13
+PyYAML==5.4
 requests==2.20.1
 s3transfer==0.2.0
 scikit-learn==0.20.2
