@@ -102,7 +102,7 @@ pyasn1==0.4.5
 pycparser==2.19
 pycryptodome==3.7.3
 pycurl==7.43.0.1
-Pygments==2.3.1
+Pygments==2.7.4
 pygobject==3.26.1
 pyparsing==2.3.1
 pystruct==0.3.2
