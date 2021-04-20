@@ -96,7 +96,7 @@ preshed==2.0.1
 progressbar==2.5
 protobuf==3.7.1
 psutil==5.5.1
-py==1.7.0
+py==1.10.0
 pyaml==18.11.0
 pyasn1==0.4.5
 pycparser==2.19
