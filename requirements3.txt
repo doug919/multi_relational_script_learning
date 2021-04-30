@@ -118,7 +118,7 @@ regex==2018.1.10
 requests==2.21.0
 requests-unixsocket==0.1.5
 responses==0.10.5
-rsa==3.4.2
+rsa==4.7
 s3transfer==0.2.0
 sacremoses==0.0.19
 scikit-learn==0.20.2
