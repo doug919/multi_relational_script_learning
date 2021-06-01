@@ -149,7 +149,7 @@ tqdm==4.31.1
 typing==3.6.6
 ujson==1.35
 Unidecode==1.0.23
-urllib3==1.24.2
+urllib3==1.26.5
 wcwidth==0.1.7
 websocket-client==0.54.0
 Werkzeug==0.14.1
