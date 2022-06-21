@@ -22,7 +22,7 @@ Lasagne==0.2.dev1
 lxml==4.3.2
 matplotlib==2.2.3
 nltk==3.4
-numpy==1.15.4
+numpy==1.22.0
 parse==1.9.0
 progressbar==2.5
 protobuf==3.7.1
