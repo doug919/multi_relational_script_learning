@@ -87,7 +87,7 @@ parse==1.11.1
 parsimonious==0.8.0
 pasaffe==0.51
 pbr==5.1.2
-Pillow==5.1.0
+Pillow==9.3.0
 plac==0.9.6
 pluggy==0.8.1
 praw==5.3.0
