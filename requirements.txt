@@ -5,7 +5,7 @@ boto3==1.9.96
 botocore==1.12.96
 bratreader==1.0.1
 bz2file==0.98
-certifi==2018.11.29
+certifi==2022.12.7
 chardet==3.0.4
 cycler==0.10.0
 docutils==0.14
